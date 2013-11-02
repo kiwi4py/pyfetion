@@ -24,6 +24,10 @@ class PyFetion:
         self._password = password 
         self._login()
 
+    def __del__(self):
+        self._logout()
+
+
     def _login(self):
         # first login
         uri = 'http://f.10086.cn/huc/user/space/login.do?m=submit&fr=space'
@@ -40,6 +44,12 @@ class PyFetion:
         else:
             uid = self._get_uid(mobile)
             return self._to_uid(uid, message) if uid else ''
+
+    def _logout(self):
+        uri = 'http://f.10086.cn/im/index/logoutsubmit.action'
+        result = self._post(uri)
+        
+        return result;
 
     def _to_myself(self, message):
         '''发送消息给自己'''
@@ -89,8 +99,7 @@ class PyFetion:
 
 
 if __name__ == "__main__":
-    username = '13811467153'
-    password = 'XXXXXXX'
+    username = '1381146XXXX'
+    password = 'XXXXXX'
     f = PyFetion(username, password)
-    f.send('15711207729', '大唐,这是一条python发送的fetion测试短信')
-    f.send('13811467153', '这是一条python发送的fetion测试短信')
+    f.send('1571120XXXX', '这是一条python发送的fetion测试短信')
